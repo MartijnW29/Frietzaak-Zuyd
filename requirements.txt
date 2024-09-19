@@ -1,0 +1,24 @@
+Proritizering	Numering	Eis
+
+Functional	U-REQ-101	De gebruiker voegt items toe aan zijn winkelmandje.					
+Functional	U-REQ-102	De gebruiken bekijkt zijn winkelmandje.
+Functional	U-REQ-103	De gebruiker verwijderd items uit zijn winkelmandje.
+Functional	U-REQ-104	De gebruiken ziet vorige bestellingen in.
+Functional	U-REQ-105	De gebruiker slaat zijn adres / bezorg locatie op.
+Functional	U-REQ-106	De medewerker weergeeft alle onvoltooide orders.
+Functional	U-REQ-107	De medewerker zoekt het adres op voor een bezorging.
+Functional	U-REQ-108	De medewerker veranderd de status van een order naar voltooid.
+
+Non-Functional	S-REQ-201	Het systeem biedt aanbevelingen aan op basis van gebruikers hun koopgeschiedenis.
+Functional	S-REQ-202	Het systeem slaat gebruiker gegevens op.
+Non-Functional	S-REQ-203	Het systeem weergeeft orders op basis van bestel tijd.
+Functional	S-REQ-204	Het systeem slaat producten op.
+Functional	S-REQ-205	Het systeem bewaart productgegevens.
+Non-Functional  S-REQ-205	Het systeem slaat gegevens op in een MYSQL database.
+
+	
+
+
+nummering
+
+Prioritering
