@@ -1,0 +1,85 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Marti\\Desktop\\Frietzaak\\Artefact2.0\\Frietzaak\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8183F871-E2DE-47D9-BAB7-7B5C0BB0F492}|WebApplication1\\WebApplication1.csproj|c:\\users\\marti\\desktop\\frietzaak\\artefact2.0\\frietzaak\\webapplication1\\models\\frietzaakdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8183F871-E2DE-47D9-BAB7-7B5C0BB0F492}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\frietzaakdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8183F871-E2DE-47D9-BAB7-7B5C0BB0F492}|WebApplication1\\WebApplication1.csproj|c:\\users\\marti\\desktop\\frietzaak\\artefact2.0\\frietzaak\\webapplication1\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8183F871-E2DE-47D9-BAB7-7B5C0BB0F492}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8183F871-E2DE-47D9-BAB7-7B5C0BB0F492}|WebApplication1\\WebApplication1.csproj|c:\\users\\marti\\desktop\\frietzaak\\artefact2.0\\frietzaak\\webapplication1\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8183F871-E2DE-47D9-BAB7-7B5C0BB0F492}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8183F871-E2DE-47D9-BAB7-7B5C0BB0F492}|WebApplication1\\WebApplication1.csproj|c:\\users\\marti\\desktop\\frietzaak\\artefact2.0\\frietzaak\\webapplication1\\models\\gebruiker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8183F871-E2DE-47D9-BAB7-7B5C0BB0F492}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\gebruiker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FrietzaakDBContext.cs",
+              "DocumentMoniker": "C:\\Users\\Marti\\Desktop\\Frietzaak\\Artefact2.0\\Frietzaak\\WebApplication1\\Models\\FrietzaakDBContext.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\FrietzaakDBContext.cs",
+              "ToolTip": "C:\\Users\\Marti\\Desktop\\Frietzaak\\Artefact2.0\\Frietzaak\\WebApplication1\\Models\\FrietzaakDBContext.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\FrietzaakDBContext.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAYwBYAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T09:06:33.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\Marti\\Desktop\\Frietzaak\\Artefact2.0\\Frietzaak\\WebApplication1\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\Order.cs",
+              "ToolTip": "C:\\Users\\Marti\\Desktop\\Frietzaak\\Artefact2.0\\Frietzaak\\WebApplication1\\Models\\Order.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\Order.cs",
+              "ViewState": "AgIAAAAAAADgYZq74K8jwBAAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T08:51:59.547Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\Marti\\Desktop\\Frietzaak\\Artefact2.0\\Frietzaak\\WebApplication1\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\Marti\\Desktop\\Frietzaak\\Artefact2.0\\Frietzaak\\WebApplication1\\Models\\Product.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\Product.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAxwA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T08:50:02.249Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Gebruiker.cs",
+              "DocumentMoniker": "C:\\Users\\Marti\\Desktop\\Frietzaak\\Artefact2.0\\Frietzaak\\WebApplication1\\Models\\Gebruiker.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\Gebruiker.cs",
+              "ToolTip": "C:\\Users\\Marti\\Desktop\\Frietzaak\\Artefact2.0\\Frietzaak\\WebApplication1\\Models\\Gebruiker.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\Gebruiker.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T08:44:04.561Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+using WebApplication1.Models;
+
 namespace WebApplication1
 {
     public class Program
@@ -8,6 +10,7 @@ namespace WebApplication1
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<FrietzaakDBContext>();
 
             var app = builder.Build();
 
