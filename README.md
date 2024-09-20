@@ -5,5 +5,4 @@
 **2.** Go to tools and select **Nuget Packet Manager Console** <br/>
 **3.** Type *add-migration* and press enter <br/>
 **4.** Type *update-database* and press enter <br/> 
-<br/>
-***You have now created the Database***
+***5. You have now created the Database***
