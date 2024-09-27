@@ -8,12 +8,11 @@ namespace WebApplication1.Models
 
         [Required]
         public int GebruikerID { get; set; }
-        public virtual Gebruiker Gebruiker { get; set; } = null!;
+        public virtual Gebruiker? Gebruiker { get; set; }
 
         [Required]
-        public int ProductID { get; set; }
-        public virtual Product Product { get; set; } = null!;
+        public List<int>? OrderLineIDs { get; set; }
+        public virtual List<OrderLine>? OrderLine { get; set; }
 
-        public double Totaalprijs {  get; set; }
     }
 }

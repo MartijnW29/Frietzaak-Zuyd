@@ -4,13 +4,15 @@ namespace WebApplication1.Models
 {
     public class FrietzaakDBContext : DbContext
     {
-        public DbSet<Gebruiker> Gebruikers { get; set; } = null!;
-        public DbSet<Product> Products { get; set; } = null!;
-        public DbSet<Order> Orders { get; set; } = null!;
+        public DbSet<Gebruiker> Gebruikers { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderLine> OrderLines { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connection = @"Data Source=.;Initial Catalog=Frietzaak;Integrated Security=true;TrustServerCertificate=True;";
+            string connection = @"Data Source=.;Initial Catalog=Frietzaak2.0;Integrated Security=true;TrustServerCertificate=True;";
             optionsBuilder.UseSqlServer(connection);
         }
 

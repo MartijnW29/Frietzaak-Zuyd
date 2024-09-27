@@ -17,5 +17,8 @@
 
         public string? Telefoonnummer { get; set; }
 
+
+        public List<int>? OrderIDs { get; set; }
+        public List<Order>? Orders { get; set; }
     }
 }

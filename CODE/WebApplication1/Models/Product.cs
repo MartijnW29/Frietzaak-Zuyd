@@ -9,5 +9,8 @@
         public string? ProductBeschrijving { get; set; }
 
         public double ProductPrijs {  get; set; }
+
+        public List<int>? OrderlineID { get; set; }
+        public List<OrderLine>? Orderlines { get; set; }
     }
 }

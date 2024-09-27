@@ -5,7 +5,7 @@
 namespace WebApplication1.Migrations
 {
     /// <inheritdoc />
-    public partial class beginnerclasses : Migration
+    public partial class OrderLine : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,8 +51,7 @@ namespace WebApplication1.Migrations
                     OrderID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GebruikerID = table.Column<int>(type: "int", nullable: false),
-                    ProductID = table.Column<int>(type: "int", nullable: false),
-                    Totaalprijs = table.Column<double>(type: "float", nullable: false)
+                    OrderLineID = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,12 +62,34 @@ namespace WebApplication1.Migrations
                         principalTable: "Gebruikers",
                         principalColumn: "GebruikerID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderLines",
+                columns: table => new
+                {
+                    OrderLineID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GebruikerID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GebruikerID1 = table.Column<int>(type: "int", nullable: true),
+                    OrderID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OrderID1 = table.Column<int>(type: "int", nullable: true),
+                    PoductAmount = table.Column<int>(type: "int", nullable: true),
+                    Productprijs = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderLines", x => x.OrderLineID);
                     table.ForeignKey(
-                        name: "FK_Orders_Products_ProductID",
-                        column: x => x.ProductID,
-                        principalTable: "Products",
-                        principalColumn: "ProductID",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_OrderLines_Gebruikers_GebruikerID1",
+                        column: x => x.GebruikerID1,
+                        principalTable: "Gebruikers",
+                        principalColumn: "GebruikerID");
+                    table.ForeignKey(
+                        name: "FK_OrderLines_Orders_OrderID1",
+                        column: x => x.OrderID1,
+                        principalTable: "Orders",
+                        principalColumn: "OrderID");
                 });
 
             migrationBuilder.InsertData(
@@ -82,27 +103,35 @@ namespace WebApplication1.Migrations
                 values: new object[] { 1, null, "Frikandel", 2.25 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderLines_GebruikerID1",
+                table: "OrderLines",
+                column: "GebruikerID1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderLines_OrderID1",
+                table: "OrderLines",
+                column: "OrderID1");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_GebruikerID",
                 table: "Orders",
                 column: "GebruikerID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_ProductID",
-                table: "Orders",
-                column: "ProductID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "OrderLines");
+
+            migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Gebruikers");
-
-            migrationBuilder.DropTable(
-                name: "Products");
         }
     }
 }
