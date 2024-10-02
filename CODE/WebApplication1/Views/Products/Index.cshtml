@@ -21,6 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.ProductPrijs)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderlineID)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -35,6 +38,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductPrijs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderlineID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> |

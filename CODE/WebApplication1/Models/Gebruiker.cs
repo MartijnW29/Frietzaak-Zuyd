@@ -18,7 +18,7 @@
         public string? Telefoonnummer { get; set; }
 
 
-        public List<int>? OrderIDs { get; set; }
+        //public List<int>? OrderIDs { get; set; } hoeft niet
         public List<Order>? Orders { get; set; }
     }
 }

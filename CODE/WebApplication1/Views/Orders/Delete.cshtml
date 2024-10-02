@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Models.Product
+﻿@model WebApplication1.Models.Order
 
 @{
     ViewData["Title"] = "Delete";
@@ -8,37 +8,37 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Product</h4>
+    <h4>Order</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductNaam)
+            @Html.DisplayNameFor(model => model.Gebruiker)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductNaam)
+            @Html.DisplayFor(model => model.Gebruiker.GebruikerID)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductBeschrijving)
+            @Html.DisplayNameFor(model => model.Totaalprijs)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductBeschrijving)
+            @Html.DisplayFor(model => model.Totaalprijs)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductPrijs)
+            @Html.DisplayNameFor(model => model.BestelDatum)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductPrijs)
+            @Html.DisplayFor(model => model.BestelDatum)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OrderlineID)
+            @Html.DisplayNameFor(model => model.Afgehandeld)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OrderlineID)
+            @Html.DisplayFor(model => model.Afgehandeld)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="ProductID" />
+        <input type="hidden" asp-for="OrderID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

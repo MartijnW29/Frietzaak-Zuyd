@@ -12,8 +12,8 @@ using WebApplication1.Models;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(FrietzaakDBContext))]
-    [Migration("20240927080315_OrderLine")]
-    partial class OrderLine
+    [Migration("20240927083156_allClasses")]
+    partial class allClasses
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,9 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HuisnummerToevoeging")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrderIDs")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Plaats")
@@ -80,12 +83,21 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderID"));
 
+                    b.Property<bool?>("Afgehandeld")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("BestelDatum")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("GebruikerID")
                         .HasColumnType("int");
 
-                    b.Property<string>("OrderLineID")
+                    b.Property<string>("OrderLineIDs")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("Totaalprijs")
+                        .HasColumnType("float");
 
                     b.HasKey("OrderID");
 
@@ -102,12 +114,6 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderLineID"));
 
-                    b.Property<string>("GebruikerID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("GebruikerID1")
-                        .HasColumnType("int");
-
                     b.Property<string>("OrderID")
                         .HasColumnType("nvarchar(max)");
 
@@ -117,14 +123,20 @@ namespace WebApplication1.Migrations
                     b.Property<int?>("PoductAmount")
                         .HasColumnType("int");
 
+                    b.Property<string>("ProductID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProductID1")
+                        .HasColumnType("int");
+
                     b.Property<int?>("Productprijs")
                         .HasColumnType("int");
 
                     b.HasKey("OrderLineID");
 
-                    b.HasIndex("GebruikerID1");
-
                     b.HasIndex("OrderID1");
+
+                    b.HasIndex("ProductID1");
 
                     b.ToTable("OrderLines");
                 });
@@ -136,6 +148,9 @@ namespace WebApplication1.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductID"));
+
+                    b.Property<string>("OrderlineID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductBeschrijving")
                         .HasColumnType("nvarchar(max)");
@@ -162,7 +177,7 @@ namespace WebApplication1.Migrations
             modelBuilder.Entity("WebApplication1.Models.Order", b =>
                 {
                     b.HasOne("WebApplication1.Models.Gebruiker", "Gebruiker")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("GebruikerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -172,22 +187,32 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.OrderLine", b =>
                 {
-                    b.HasOne("WebApplication1.Models.Gebruiker", "Gebruiker")
-                        .WithMany()
-                        .HasForeignKey("GebruikerID1");
-
                     b.HasOne("WebApplication1.Models.Order", "Order")
                         .WithMany("OrderLine")
                         .HasForeignKey("OrderID1");
 
-                    b.Navigation("Gebruiker");
+                    b.HasOne("WebApplication1.Models.Product", "Product")
+                        .WithMany("Orderlines")
+                        .HasForeignKey("ProductID1");
 
                     b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Gebruiker", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Order", b =>
                 {
                     b.Navigation("OrderLine");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Product", b =>
+                {
+                    b.Navigation("Orderlines");
                 });
 #pragma warning restore 612, 618
         }

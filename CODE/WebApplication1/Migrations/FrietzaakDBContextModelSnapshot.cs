@@ -42,9 +42,6 @@ namespace WebApplication1.Migrations
                     b.Property<string>("HuisnummerToevoeging")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OrderIDs")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Plaats")
                         .HasColumnType("nvarchar(max)");
 
@@ -80,12 +77,17 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderID"));
 
+                    b.Property<bool?>("Afgehandeld")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("BestelDatum")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("GebruikerID")
                         .HasColumnType("int");
 
-                    b.Property<string>("OrderLineIDs")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double?>("Totaalprijs")
+                        .HasColumnType("float");
 
                     b.HasKey("OrderID");
 
@@ -159,6 +161,24 @@ namespace WebApplication1.Migrations
                             ProductID = 1,
                             ProductNaam = "Frikandel",
                             ProductPrijs = 2.25
+                        },
+                        new
+                        {
+                            ProductID = 2,
+                            ProductNaam = "Kleine friet",
+                            ProductPrijs = 2.0
+                        },
+                        new
+                        {
+                            ProductID = 3,
+                            ProductNaam = "Medium friet",
+                            ProductPrijs = 3.5
+                        },
+                        new
+                        {
+                            ProductID = 4,
+                            ProductNaam = "Grote friet",
+                            ProductPrijs = 4.25
                         });
                 });
 

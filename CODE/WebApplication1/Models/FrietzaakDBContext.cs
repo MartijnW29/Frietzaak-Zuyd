@@ -12,7 +12,7 @@ namespace WebApplication1.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connection = @"Data Source=.;Initial Catalog=Frietzaak2.0;Integrated Security=true;TrustServerCertificate=True;";
+            string connection = @"Data Source=.;Initial Catalog=Frietzaak2.1;Integrated Security=true;TrustServerCertificate=True;";
             optionsBuilder.UseSqlServer(connection);
         }
 
@@ -36,10 +36,28 @@ namespace WebApplication1.Models
                 ProductNaam = "Frikandel",
                 ProductPrijs = 2.25
             };
+            Product product2 = new Product()
+            {
+                ProductID = 2,
+                ProductNaam = "Kleine friet",
+                ProductPrijs = 2
+            };
+            Product product3 = new Product()
+            {
+                ProductID = 3,
+                ProductNaam = "Medium friet",
+                ProductPrijs = 3.50
+            };
+            Product product4 = new Product()
+            {
+                ProductID = 4,
+                ProductNaam = "Grote friet",
+                ProductPrijs = 4.25
+            };
             modelBuilder.Entity<Gebruiker>()
                 .HasData(gebruiker1);
             modelBuilder.Entity<Product>()
-                .HasData(product1);
+                .HasData(product1,product2,product3,product4);
 
         }
     }
