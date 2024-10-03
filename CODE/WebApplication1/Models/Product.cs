@@ -2,15 +2,14 @@
 {
     public class Product
     {
-        public int ProductID { get; set; }
+        public int Id { get; set; }
 
-        public string? ProductNaam { get; set; }
+        public string? Name { get; set; }
 
-        public string? ProductBeschrijving { get; set; }
+        public string? Description { get; set; }
 
-        public double ProductPrijs {  get; set; }
+        public double Price {  get; set; }
 
-        public List<int>? OrderlineID { get; set; }
         public List<OrderLine>? Orderlines { get; set; }
     }
 }

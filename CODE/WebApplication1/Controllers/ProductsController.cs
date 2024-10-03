@@ -18,6 +18,12 @@ namespace WebApplication1.Controllers
             _context = context;
         }
 
+        //bestellen
+        public async Task<IActionResult> Bestellen()
+        {
+            return View(await _context.Products.ToListAsync());
+        }
+
         // GET: Products
         public async Task<IActionResult> Index()
         {
@@ -33,7 +39,7 @@ namespace WebApplication1.Controllers
             }
 
             var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.ProductID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -41,6 +47,26 @@ namespace WebApplication1.Controllers
 
             return View(product);
         }
+
+        // GET: Products/Details/5
+        public async Task<IActionResult> Rob(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = await _context.Products
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View("details", product);
+        }
+
+
 
         // GET: Products/Create
         public IActionResult Create()
@@ -53,7 +79,7 @@ namespace WebApplication1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductID,ProductNaam,ProductBeschrijving,ProductPrijs,OrderlineID")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -85,9 +111,9 @@ namespace WebApplication1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,ProductNaam,ProductBeschrijving,ProductPrijs,OrderlineID")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price")] Product product)
         {
-            if (id != product.ProductID)
+            if (id != product.Id)
             {
                 return NotFound();
             }
@@ -101,7 +127,7 @@ namespace WebApplication1.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.ProductID))
+                    if (!ProductExists(product.Id))
                     {
                         return NotFound();
                     }
@@ -124,7 +150,7 @@ namespace WebApplication1.Controllers
             }
 
             var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.ProductID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -150,7 +176,7 @@ namespace WebApplication1.Controllers
 
         private bool ProductExists(int id)
         {
-            return _context.Products.Any(e => e.ProductID == id);
+            return _context.Products.Any(e => e.Id == id);
         }
     }
 }

@@ -4,21 +4,21 @@ namespace WebApplication1.Models
 {
     public class Order
     {
-        public int OrderID { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        public int GebruikerID { get; set; }
-        public virtual Gebruiker? Gebruiker { get; set; }
+        public int CustomerId { get; set; }
+        public virtual Customer? Customer { get; set; }
 
         [Required]
         //public List<int>? OrderLineIDs { get; set; } hoeft niet
         public virtual List<OrderLine>? OrderLine { get; set; }
 
-        public double? Totaalprijs {  get; set; }
+        public double? TotalPrice {  get; set; }
 
-        public DateTime? BestelDatum { get; set; }
+        public DateTime? OrderDate { get; set; }
 
-        public bool? Afgehandeld { get; set; }
+        public bool? Completed { get; set; }
 
     }
 }

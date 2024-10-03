@@ -12,8 +12,8 @@ using WebApplication1.Models;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(FrietzaakDBContext))]
-    [Migration("20240927083156_allClasses")]
-    partial class allClasses
+    [Migration("20241007095223_tst")]
+    partial class tst
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,182 +25,193 @@ namespace WebApplication1.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("WebApplication1.Models.Gebruiker", b =>
+            modelBuilder.Entity("WebApplication1.Models.Customer", b =>
                 {
-                    b.Property<int>("GebruikerID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GebruikerID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Emailadres")
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Gebruikersnaam")
+                    b.Property<string>("HomeNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Huisnummer")
+                    b.Property<string>("HomeNumberAddition")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HuisnummerToevoeging")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OrderIDs")
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Plaats")
+                    b.Property<string>("Place")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Straat")
+                    b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Telefoonnummer")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("GebruikerID");
+                    b.HasKey("Id");
 
                     b.ToTable("Gebruikers");
 
                     b.HasData(
                         new
                         {
-                            GebruikerID = 1,
-                            Emailadres = "henk@gmail.com",
-                            Gebruikersnaam = "henk",
-                            Huisnummer = "69",
-                            HuisnummerToevoeging = "b",
-                            Plaats = "Heerlen",
-                            Straat = "HuisWeg",
-                            Telefoonnummer = "0669476936"
+                            Id = 1,
+                            Email = "henk@gmail.com",
+                            HomeNumber = "69",
+                            HomeNumberAddition = "b",
+                            Name = "henk",
+                            PhoneNumber = "0669476936",
+                            Place = "Heerlen",
+                            Street = "HuisWeg"
                         });
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Order", b =>
                 {
-                    b.Property<int>("OrderID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool?>("Afgehandeld")
+                    b.Property<bool?>("Completed")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("BestelDatum")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("GebruikerID")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("OrderLineIDs")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("OrderDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<double?>("Totaalprijs")
+                    b.Property<double?>("TotalPrice")
                         .HasColumnType("float");
 
-                    b.HasKey("OrderID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("GebruikerID");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.OrderLine", b =>
                 {
-                    b.Property<int>("OrderLineID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderLineID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("OrderID")
+                    b.Property<string>("OrderId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderID1")
+                    b.Property<int?>("OrderId1")
                         .HasColumnType("int");
 
                     b.Property<int?>("PoductAmount")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProductID")
+                    b.Property<string>("ProductId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProductID1")
+                    b.Property<int?>("ProductId1")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Productprijs")
+                    b.Property<int?>("ProductTotalprice")
                         .HasColumnType("int");
 
-                    b.HasKey("OrderLineID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("OrderID1");
+                    b.HasIndex("OrderId1");
 
-                    b.HasIndex("ProductID1");
+                    b.HasIndex("ProductId1");
 
                     b.ToTable("OrderLines");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Product", b =>
                 {
-                    b.Property<int>("ProductID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("OrderlineID")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductBeschrijving")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductNaam")
+                    b.Property<string>("OrderlineId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("ProductPrijs")
+                    b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.HasKey("ProductID");
+                    b.HasKey("Id");
 
                     b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
-                            ProductID = 1,
-                            ProductNaam = "Frikandel",
-                            ProductPrijs = 2.25
+                            Id = 1,
+                            Name = "Frikandel",
+                            Price = 2.25
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Kleine friet",
+                            Price = 2.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Medium friet",
+                            Price = 3.5
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Grote friet",
+                            Price = 4.25
                         });
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Order", b =>
                 {
-                    b.HasOne("WebApplication1.Models.Gebruiker", "Gebruiker")
+                    b.HasOne("WebApplication1.Models.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("GebruikerID")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Gebruiker");
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.OrderLine", b =>
                 {
                     b.HasOne("WebApplication1.Models.Order", "Order")
                         .WithMany("OrderLine")
-                        .HasForeignKey("OrderID1");
+                        .HasForeignKey("OrderId1");
 
                     b.HasOne("WebApplication1.Models.Product", "Product")
                         .WithMany("Orderlines")
-                        .HasForeignKey("ProductID1");
+                        .HasForeignKey("ProductId1");
 
                     b.Navigation("Order");
 
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.Gebruiker", b =>
+            modelBuilder.Entity("WebApplication1.Models.Customer", b =>
                 {
                     b.Navigation("Orders");
                 });

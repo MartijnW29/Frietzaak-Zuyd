@@ -46,7 +46,7 @@ namespace Frietzaak_API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, Product product)
         {
-            if (id != product.ProductID)
+            if (id != product.Id)
             {
                 return BadRequest();
             }
@@ -80,7 +80,7 @@ namespace Frietzaak_API.Controllers
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
+            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
 
         // DELETE: api/Products/5
@@ -101,7 +101,7 @@ namespace Frietzaak_API.Controllers
 
         private bool ProductExists(int id)
         {
-            return _context.Products.Any(e => e.ProductID == id);
+            return _context.Products.Any(e => e.Id == id);
         }
     }
 }
