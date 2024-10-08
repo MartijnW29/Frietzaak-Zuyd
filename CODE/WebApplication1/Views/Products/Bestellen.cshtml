@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<WebApplication1.Models.Product>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Bestellen";
 }
 
-<h1>Index</h1>
+<h1>Bestellen</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -37,8 +37,8 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                    <a asp-action="AddToOrder" asp-route-id="@item.Id">Toevoegen aan oder</a> |
-                    <a asp-action="RemoveFromOrder" asp-route-id="@item.Id">Verwijder van order</a> |
+                    <a asp-controller="Orders" asp-action="AddToOrder" asp-route-id="@item.Id">Toevoegen aan order</a> |
+                    <a asp-controller="Orders" asp-action="RemoveFromOrder" asp-route-id="@item.Id">Verwijder van order</a>
             </td>
         </tr>
 }

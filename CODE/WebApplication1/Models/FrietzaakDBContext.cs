@@ -4,7 +4,7 @@ namespace WebApplication1.Models
 {
     public class FrietzaakDBContext : DbContext
     {
-        public DbSet<Customer> Gebruikers { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
 
@@ -18,7 +18,7 @@ namespace WebApplication1.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            Customer gebruiker1 = new Customer()
+            Customer customer1 = new Customer()
             {
                 Id = 1,
                 Name = "henk",
@@ -55,7 +55,7 @@ namespace WebApplication1.Models
                 Price = 4.25
             };
             modelBuilder.Entity<Customer>()
-                .HasData(gebruiker1);
+                .HasData(customer1);
             modelBuilder.Entity<Product>()
                 .HasData(product1,product2,product3,product4);
 

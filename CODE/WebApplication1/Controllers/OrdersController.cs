@@ -9,22 +9,38 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class CustomersController : Controller
+    public class OrdersController : Controller
     {
         private readonly FrietzaakDBContext _context;
 
-        public CustomersController(FrietzaakDBContext context)
+        public OrdersController(FrietzaakDBContext context)
         {
             _context = context;
         }
 
-        // GET: Customers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> AddToOrder(int? id)
         {
-            return View(await _context.Customers.ToListAsync());
+            var customer = _context.Customers.FirstOrDefault(c => c.Name == "Henk");
+            Order order = new Order
+            {
+                Customer = customer 
+            }; 
+            return RedirectToAction(controllerName:"Products", actionName:"Bestellen");
         }
 
-        // GET: Customers/Details/5
+        public async Task<IActionResult> RemoveFromOrder()
+        {
+            return RedirectToAction(controllerName: "Products", actionName: "Bestellen");
+        }
+
+        // GET: Orders
+        public async Task<IActionResult> Index()
+        {
+            var frietzaakDBContext = _context.Orders.Include(o => o.Customer);
+            return View(await frietzaakDBContext.ToListAsync());
+        }
+
+        // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +48,42 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
+            var order = await _context.Orders
+                .Include(o => o.Customer)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(order);
         }
 
-        // GET: Customers/Create
+        // GET: Orders/Create
         public IActionResult Create()
         {
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id");
             return View();
         }
 
-        // POST: Customers/Create
+        // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Place,Street,HomeNumber,HomeNumberAddition,Email,PhoneNumber")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Id,CustomerId,TotalPrice,OrderDate,Completed")] Order order)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(customer);
+                _context.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(customer);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", order.CustomerId);
+            return View(order);
         }
 
-        // GET: Customers/Edit/5
+        // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +91,23 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer == null)
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null)
             {
                 return NotFound();
             }
-            return View(customer);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", order.CustomerId);
+            return View(order);
         }
 
-        // POST: Customers/Edit/5
+        // POST: Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Place,Street,HomeNumber,HomeNumberAddition,Email,PhoneNumber")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CustomerId,TotalPrice,OrderDate,Completed")] Order order)
         {
-            if (id != customer.Id)
+            if (id != order.Id)
             {
                 return NotFound();
             }
@@ -96,12 +116,12 @@ namespace WebApplication1.Controllers
             {
                 try
                 {
-                    _context.Update(customer);
+                    _context.Update(order);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CustomerExists(customer.Id))
+                    if (!OrderExists(order.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +132,11 @@ namespace WebApplication1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(customer);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", order.CustomerId);
+            return View(order);
         }
 
-        // GET: Customers/Delete/5
+        // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,34 +144,35 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
+            var order = await _context.Orders
+                .Include(o => o.Customer)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(order);
         }
 
-        // POST: Customers/Delete/5
+        // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer != null)
+            var order = await _context.Orders.FindAsync(id);
+            if (order != null)
             {
-                _context.Customers.Remove(customer);
+                _context.Orders.Remove(order);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CustomerExists(int id)
+        private bool OrderExists(int id)
         {
-            return _context.Customers.Any(e => e.Id == id);
+            return _context.Orders.Any(e => e.Id == id);
         }
     }
 }
