@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WebApplication1.Migrations;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -21,11 +22,31 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> AddToOrder(int? id)
         {
             var customer = _context.Customers.FirstOrDefault(c => c.Name == "Henk");
+            OrderLine orderline = new OrderLine
+            {
+                ProductId = id
+            };
+
+            //foreach Orderline in order 
+
             Order order = new Order
             {
-                Customer = customer 
-            }; 
-            return RedirectToAction(controllerName:"Products", actionName:"Bestellen");
+                
+                Completed = false,
+                OrderDate = DateTime.Now,
+                OrderLines = new List<OrderLine> { orderline },
+                Customer = customer,
+                CustomerId = customer.Id,
+                
+                
+                TotalPrice = 10
+                
+            };
+
+
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(controllerName: "Products", actionName: "Bestellen");
         }
 
         public async Task<IActionResult> RemoveFromOrder()
@@ -145,6 +166,7 @@ namespace WebApplication1.Controllers
             }
 
             var order = await _context.Orders
+                .Include(o => o.OrderLines)
                 .Include(o => o.Customer)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)

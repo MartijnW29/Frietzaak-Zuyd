@@ -12,7 +12,7 @@ namespace WebApplication1.Models
 
         [Required]
         //public List<int>? OrderLineIDs { get; set; } hoeft niet
-        public virtual List<OrderLine>? OrderLine { get; set; }
+        public virtual List<OrderLine>? OrderLines { get; set; }
 
         public double? TotalPrice {  get; set; }
 

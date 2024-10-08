@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication1.Models;
 
@@ -11,9 +12,11 @@ using WebApplication1.Models;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(FrietzaakDBContext))]
-    partial class FrietzaakDBContextModelSnapshot : ModelSnapshot
+    [Migration("20241008120203_orderlineProblemSolved")]
+    partial class orderlineProblemSolved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,9 +190,8 @@ namespace WebApplication1.Migrations
             modelBuilder.Entity("WebApplication1.Models.OrderLine", b =>
                 {
                     b.HasOne("WebApplication1.Models.Order", "Order")
-                        .WithMany("OrderLines")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("OrderLine")
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("WebApplication1.Models.Product", "Product")
                         .WithMany("Orderlines")
@@ -207,7 +209,7 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.Order", b =>
                 {
-                    b.Navigation("OrderLines");
+                    b.Navigation("OrderLine");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Product", b =>

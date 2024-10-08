@@ -10,6 +10,8 @@ namespace WebApplication1.Models
 
         public DbSet<OrderLine> OrderLines { get; set; }
 
+
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string connection = @"Data Source=.;Initial Catalog=Frietzaak2.2;Integrated Security=true;TrustServerCertificate=True;";
@@ -54,6 +56,13 @@ namespace WebApplication1.Models
                 Name = "Grote friet",
                 Price = 4.25
             };
+
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.OrderLines)  // Order heeft meerdere OrderLines
+                .WithOne(ol => ol.Order)      // Elke OrderLine heeft één Order
+                .HasForeignKey(ol => ol.OrderId)  // Foreign key is OrderId in OrderLines
+                .OnDelete(DeleteBehavior.Cascade);  // Cascade delete inschakelen
+
             modelBuilder.Entity<Customer>()
                 .HasData(customer1);
             modelBuilder.Entity<Product>()
