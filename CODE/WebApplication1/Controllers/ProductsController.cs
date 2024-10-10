@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -20,9 +21,22 @@ namespace WebApplication1.Controllers
 
         //bestellen
 
-        public async Task<IActionResult> BestellenReturn(BestellenViewModel viewModel)
+        public async Task<IActionResult> BestellenReturn()
         {
-            return View("bestellen", viewModel);
+            if (TempData["BestellenViewModel"] != null)
+            {
+                // Deserialiseer het viewmodel uit TempData
+                var jsonSettings = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+                var viewModel = JsonConvert.DeserializeObject<BestellenViewModel>(
+                    TempData["BestellenViewModel"].ToString(), jsonSettings
+                );
+
+                // Stuur het viewmodel naar de Bestellen view
+                return View("Bestellen", viewModel);
+            }
+
+            // Fallback als TempData leeg is of als er een fout is
+            return RedirectToAction("Bestellen", "Products");
         }
 
         public async Task<IActionResult> Bestellen()

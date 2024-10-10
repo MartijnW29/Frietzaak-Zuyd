@@ -28,6 +28,10 @@ namespace WebApplication1.Controllers
                 .Include(o => o.OrderLines)  // Inclusief de bestaande orderregels
                 .FirstOrDefaultAsync(o => o.Id == OrderId);
 
+            if (order == null)
+            {
+
+            }
 
             if (order.OrderLines == null)
             {
@@ -63,7 +67,7 @@ namespace WebApplication1.Controllers
 
 
 
-
+            
             var viewModel = new BestellenViewModel
             {
                 Products = await _context.Products.ToListAsync(),
@@ -81,10 +85,6 @@ namespace WebApplication1.Controllers
 
 
             return RedirectToAction("BestellenReturn", "Products");
-
-
-
-
 
             //return RedirectToAction(controllerName: "Products", actionName: "BestellenReturn", BestellenViewModel viewModel);
         }
