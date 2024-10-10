@@ -19,7 +19,37 @@ namespace WebApplication1.Controllers
         }
 
         //bestellen
+
+        public async Task<IActionResult> BestellenReturn(BestellenViewModel viewModel)
+        {
+            return View("bestellen", viewModel);
+        }
+
         public async Task<IActionResult> Bestellen()
+        {
+            Order order = new Order
+            {
+                OrderDate = DateTime.Now,
+                Completed = false,
+                OrderLines = new List<OrderLine>(),
+                TotalPrice = 0,
+                Customer = _context.Customers.FirstOrDefault(c => c.Name == "Henk")
+            };
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+
+            // Vul het ViewModel met de order en de lijst van producten
+            BestellenViewModel viewModel = new BestellenViewModel
+            {
+                Order = order,
+                Products = await _context.Products.ToListAsync()
+            };
+
+            return View(viewModel);  // Stuur het ViewModel naar de view
+        }
+
+
+        public async Task<IActionResult> Overview()
         {
             return View(await _context.Products.ToListAsync());
         }

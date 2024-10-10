@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using WebApplication1.Migrations;
 using WebApplication1.Models;
 
@@ -19,34 +20,65 @@ namespace WebApplication1.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> AddToOrder(int? id)
+        public async Task<IActionResult> AddToOrder(int? id, int OrderId)
         {
             var customer = _context.Customers.FirstOrDefault(c => c.Name == "Henk");
-            OrderLine orderline = new OrderLine
+
+            var order = await _context.Orders
+                .Include(o => o.OrderLines)  // Inclusief de bestaande orderregels
+                .FirstOrDefaultAsync(o => o.Id == OrderId);
+
+
+            if (order.OrderLines == null)
             {
-                ProductId = id
-            };
+                order.OrderLines = new List<OrderLine>();
+            }
 
-            //foreach Orderline in order 
+            var existingOrderLine = order.OrderLines.FirstOrDefault(ol => ol.ProductId == id);
 
-            Order order = new Order
+            if (existingOrderLine != null)
             {
-                
-                Completed = false,
-                OrderDate = DateTime.Now,
-                OrderLines = new List<OrderLine> { orderline },
-                Customer = customer,
-                CustomerId = customer.Id,
-                
-                
-                TotalPrice = 10
-                
-            };
+                existingOrderLine.PoductAmount += 1;
+            }
+            else
+            {
+                OrderLine newOrderLine = new OrderLine
+                {
+                    ProductId = id.Value,
+                    OrderId = order.Id,
+                    PoductAmount = 1
+                };
+
+                order.OrderLines.Add(newOrderLine);
+            }
 
 
-            _context.Orders.Add(order);
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            if (product != null)
+            {
+                order.TotalPrice += product.Price;
+            }
+
             await _context.SaveChangesAsync();
-            return RedirectToAction(controllerName: "Products", actionName: "Bestellen");
+
+
+
+
+            var viewModel = new BestellenViewModel
+            {
+                Products = await _context.Products.ToListAsync(),
+                Order = order // Geef de bijgewerkte order mee
+            };
+
+            TempData["BestellenViewModel"] = JsonConvert.SerializeObject(viewModel); // Sla het viewmodel op in TempData
+
+            return RedirectToAction("BestellenReturn", "Products");
+
+
+
+
+
+            //return RedirectToAction(controllerName: "Products", actionName: "BestellenReturn", BestellenViewModel viewModel);
         }
 
         public async Task<IActionResult> RemoveFromOrder()
