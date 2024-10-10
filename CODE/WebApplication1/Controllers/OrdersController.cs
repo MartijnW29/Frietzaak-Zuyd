@@ -70,7 +70,15 @@ namespace WebApplication1.Controllers
                 Order = order // Geef de bijgewerkte order mee
             };
 
-            TempData["BestellenViewModel"] = JsonConvert.SerializeObject(viewModel); // Sla het viewmodel op in TempData
+            // Configuratie voor JsonSerializerSettings
+            var jsonSettings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            // Sla het viewmodel op in TempData met de aangepaste instellingen
+            TempData["BestellenViewModel"] = JsonConvert.SerializeObject(viewModel, jsonSettings);
+
 
             return RedirectToAction("BestellenReturn", "Products");
 
