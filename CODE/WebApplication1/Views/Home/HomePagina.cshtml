@@ -1,41 +1,47 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frietkraam De Gouden Friet</title>
-    <link rel="stylesheet" href="css/HomePaginaStyle.css" media="all" important>
-   
+
+    <!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/HomePaginaStyle.css" media="all">
 </head>
 <body>
-    <header>
-        <h1>Welkom bij De Gouden Friet</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Ons Menu</a></li>
-                <li><a href="#">Over Ons</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
+
+    
+    <header class="bg-warning py-3">
+        <div class="container">
+            <h1 class="text-center">Welkom bij De Gouden Friet</h1>
+        </div>
     </header>
 
+    
     <main>
-        <section class="hero">
-            <h2>De beste friet uit eigen hand!</h2>
-            <p>Bezoek ons voor een versgemaakte, heerlijke portie friet of geniet van ons brede assortiment aan snacks met de beste sauzen.</p>
-            <a href="#" class="btn">Bekijk ons menu</a>
+        <section class="hero bg-light text-center py-5">
+            <div class="container">
+                <h2 class="display-4">De beste friet uit eigen hand!</h2>
+                <p class="lead">Bezoek ons voor een versgemaakte, heerlijke portie friet of geniet van ons brede assortiment aan snacks met de beste sauzen.</p>
+                <a href="@Url.Action("Bestellen", "Products")" class="btn btn-primary btn-lg mt-3">Bekijk ons menu</a>
+            </div>
         </section>
 
-        <section class="about">
-            <h2>Over De Gouden Friet</h2>
-            <p>De Gouden Friet is een familiebedrijf dat inmiddels al zes generaties heeft doorstaan.</p>
+        
+        <section class="about py-5 bg-white text-center">
+            <div class="container">
+                <h2 class="mb-4">Over De Gouden Friet</h2>
+                <p class="lead">De Gouden Friet is een familiebedrijf dat inmiddels al zes generaties van pieten heeft doorstaan.</p>
+            </div>
         </section>
     </main>
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
