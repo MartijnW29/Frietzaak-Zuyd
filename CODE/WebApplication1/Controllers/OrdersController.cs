@@ -101,6 +101,17 @@ namespace WebApplication1.Controllers
             return View(await frietzaakDBContext.ToListAsync());
         }
 
+        public async Task<IActionResult> Overview()
+        {
+            var frietzaakDBContext = await _context.Orders
+                .Include(o => o.Customer)
+                .Include(o => o.OrderLines)
+                    .ThenInclude(ol => ol.Product) // Include the associated product
+                .ToListAsync();
+
+            return View(frietzaakDBContext);
+        }
+
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {

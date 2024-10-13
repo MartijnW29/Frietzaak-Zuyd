@@ -20,7 +20,7 @@ namespace Frietzaak_API.Controllers
             _context = context;
         }
 
-        // GET: api/Products
+        // GET: api/Products Haal alle porducten op
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
